@@ -4,6 +4,13 @@ describe "Services" do
   context "When users" do
     let(:service) { Service.create(:name => 'test', :description => 'test') }
 
+    describe "GET /" do
+      it "works!" do
+        get services_path
+        response.status.should be(200)
+      end
+    end
+
     describe "GET /services" do
       it "works!" do
         get services_path
