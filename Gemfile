@@ -6,15 +6,20 @@ gem 'twitter-bootstrap-rails', :git => 'https://github.com/seyhunak/twitter-boot
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'rspec-rails'
+  gem 'guard-rspec'
 end
 
 group :test do
-  gem 'capybara', '1.1.2'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'rb-fsevent'
+  gem 'growl'
+  gem 'guard-spork'
+  gem 'spork'
 end
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier',     '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
 end
