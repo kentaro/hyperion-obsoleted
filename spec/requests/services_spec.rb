@@ -18,9 +18,9 @@ describe "Services" do
       end
     end
 
-    describe "GET /services/:id" do
+    describe "GET /services/:name" do
       it "works!" do
-        get service_path(@service.id)
+        get service_path(@service)
         response.status.should be(200)
       end
     end
@@ -32,30 +32,30 @@ describe "Services" do
       end
     end
 
-    describe "GET /services/:id/edit" do
+    describe "GET /services/:name/edit" do
       it "works!" do
-        get edit_service_path(@service.id)
+        get edit_service_path(@service)
         response.status.should be(200)
       end
     end
 
     describe "POST /services" do
       it "works!" do
-        post services_path, name: 'test', description: 'test'
+        post services_path, 'service[name]' => 'test2', 'service[description]' => 'test'
         response.status.should be(302)
       end
     end
 
-    describe "PUT /services/:id" do
+    describe "PUT /services/:name" do
       it "works!" do
-        put service_path(@service.id), name: 'updated', description: 'updated'
+        put service_path(@service.name), 'service[name]' => 'test (updated)', 'service[description]' => 'test'
         response.status.should be(302)
       end
     end
 
-    describe "DELETE /services/:id" do
+    describe "DELETE /services/:name" do
       it "works!" do
-        delete service_path(@service.id), name: 'updated', description: 'updated'
+        delete service_path(@service)
         response.status.should be(302)
       end
     end

@@ -3,4 +3,9 @@ class Host < ActiveRecord::Base
 
   has_many :services, through: :host_services
   has_many :host_services, dependent: :destroy
+
+  # To enable /host/:ip_address instead of /host/:id
+  def to_param
+    ip_address.to_s
+  end
 end

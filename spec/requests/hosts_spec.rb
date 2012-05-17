@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Hosts" do
   context "When users" do
-    before { @host = Host.create(hostname: 'test', ip_address: '127.0.0.1') }
+    before { @host = Host.create(hostname: 'test', ip_address: '192.168.0.1') }
 
     describe "GET /hosts" do
       it "works!" do
@@ -13,7 +13,7 @@ describe "Hosts" do
 
     describe "GET /hosts/:id" do
       it "works!" do
-        get host_path(@host.id)
+        get host_path(@host)
         response.status.should be(200)
       end
     end
@@ -27,28 +27,28 @@ describe "Hosts" do
 
     describe "GET /hosts/:id/edit" do
       it "works!" do
-        get edit_host_path(@host.id)
+        get edit_host_path(@host)
         response.status.should be(200)
       end
     end
 
     describe "POST /hosts" do
       it "works!" do
-        post hosts_path, hostname: 'test', ip_address: '127.0.0.1'
+        post hosts_path, 'host[hostname]' => 'test2', 'host[ip_address]' => '192.168.0.2'
         response.status.should be(302)
       end
     end
 
     describe "PUT /hosts/:id" do
       it "works!" do
-        put host_path(@host.id), hostname: 'test', ip_address: '127.0.0.1'
+        put host_path(@host), 'host[hostname]' => 'test (updated)', 'host[ip_address]' => '192.168.0.1'
         response.status.should be(302)
       end
     end
 
     describe "DELETE /hosts/:id" do
       it "works!" do
-        delete host_path(@host.id)
+        delete host_path(@host)
         response.status.should be(302)
       end
     end
