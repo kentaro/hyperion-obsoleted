@@ -48,7 +48,7 @@ describe "Services" do
 
     describe "PUT /services/:name" do
       it "works!" do
-        put service_path(@service.name), 'service[name]' => 'test (updated)', 'service[description]' => 'test'
+        put service_path(@service), 'service[name]' => 'test (updated)', 'service[description]' => 'test'
         response.status.should be(302)
       end
     end
