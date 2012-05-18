@@ -7,7 +7,7 @@ class CreateHostServices < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index [:host_id]
-    add_index [:service_id]
+    add_index :host_services, [:host_id]
+    add_index :host_services, [:service_id]
   end
 end

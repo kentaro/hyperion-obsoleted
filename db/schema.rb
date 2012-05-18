@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(:version => 20120516222358) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "host_services", ["host_id"], :name => "index_host_services_on_host_id"
+  add_index "host_services", ["service_id"], :name => "index_host_services_on_service_id"
+
   create_table "hosts", :force => true do |t|
     t.string   "ip_address"
     t.string   "hostname"
