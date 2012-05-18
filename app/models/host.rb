@@ -4,7 +4,7 @@ class Host < ActiveRecord::Base
   has_many :services, through: :host_services
   has_many :host_services, dependent: :destroy
 
-  # To enable /host/:hostname instead of /host/:id
+  # To enable /host/:hostname instead of /hosts/:id
   def to_param
     hostname
   end

@@ -6,6 +6,6 @@ class Service < ActiveRecord::Base
 
   # To enable /services/:name instead of /services/:id
   def to_param
-    name.to_s
+    name
   end
 end
