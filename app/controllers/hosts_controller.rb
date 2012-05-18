@@ -9,7 +9,7 @@ class HostsController < ApplicationController
   end
 
   def show
-    @host = Host.find_by_ip_address(params[:id])
+    @host = Host.find_by_hostname(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +27,7 @@ class HostsController < ApplicationController
   end
 
   def edit
-    @host = Host.find_by_ip_address(params[:id])
+    @host = Host.find_by_hostname(params[:id])
   end
 
   def create
@@ -45,7 +45,7 @@ class HostsController < ApplicationController
   end
 
   def update
-    @host = Host.find_by_ip_address(params[:id])
+    @host = Host.find_by_hostname(params[:id])
 
     respond_to do |format|
       if @host.update_attributes(params[:host])
@@ -59,7 +59,7 @@ class HostsController < ApplicationController
   end
 
   def destroy
-    @host = Host.find_by_ip_address(params[:id])
+    @host = Host.find_by_hostname(params[:id])
     @host.destroy
 
     respond_to do |format|

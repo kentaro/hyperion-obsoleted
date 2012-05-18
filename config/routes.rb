@@ -1,6 +1,6 @@
 Hyperion::Application.routes.draw do
   root :to => 'services#index'
 
-  resources :services
-  resources :hosts, constraints: { id: /[0-9\.]{7,15}/ }
+  resources :hosts,    constraints: { id: /[\w\-\.]+/ }
+  resources :services, constraints: { id: /[\w\-\.]+/ }
 end
