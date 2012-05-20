@@ -1,20 +1,33 @@
 <%= form_for @host, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
+    <%= f.label :hostname, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :hostname, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :ip_address, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :ip_address, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :hostname, :class => 'control-label' %>
+    <%= f.label :services, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :hostname, :class => 'text_field' %>
+      <ul id="services">
+        <li>
+          <%= f.fields_for :host_services do |service| %>
+            <%= service.select :service_id,
+                options_for_select(['unknown', nil], Service.all.map{|s| [s.name, s.id]}) %>
+          <% end %>
+        </li>
+      </ul>
     </div>
   </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                hosts_path, :class => 'btn' %>
+        hosts_path, :class => 'btn' %>
   </div>
 <% end %>

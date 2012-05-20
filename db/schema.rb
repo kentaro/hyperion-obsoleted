@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120516222358) do
   end
 
   add_index "host_services", ["host_id"], :name => "index_host_services_on_host_id"
+  add_index "host_services", ["service_id", "host_id"], :name => "index_host_services_on_service_id_and_host_id", :unique => true
   add_index "host_services", ["service_id"], :name => "index_host_services_on_service_id"
 
   create_table "hosts", :force => true do |t|

@@ -9,5 +9,6 @@ class CreateHostServices < ActiveRecord::Migration
 
     add_index :host_services, [:host_id]
     add_index :host_services, [:service_id]
+    add_index :host_services, [:service_id, :host_id], unique: true
   end
 end
