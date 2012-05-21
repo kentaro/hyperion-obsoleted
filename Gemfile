@@ -20,6 +20,7 @@ group :test do
   gem 'growl'
   gem 'guard-spork'
   gem 'spork'
+  gem 'database_cleaner'
 end
 
 group :assets do

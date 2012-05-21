@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
   def index
     @services = Service.all
+    @dangling_hosts = Host.dangling_hosts
 
     respond_to do |format|
       format.html # index.html.erb

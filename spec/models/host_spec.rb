@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Host do
-  before { @host = Host.create(hostname: 'test', ip_address: '127.0.0.1') }
+  before { @host = Host.create(hostname: 'test.example.com', ip_address: '192.168.0.1') }
 
   describe "attrs" do
     subject { @host }
@@ -49,6 +49,38 @@ describe Host do
         relation.should_not nil
         @host.destroy
         relation.should nil
+      end
+    end
+  end
+end
+
+describe 'Class Methods' do
+  context 'when no host exists' do
+    describe 'dangling_hosts' do
+      it 'returns empty array' do
+        Host.dangling_hosts.count.should == 0
+      end
+    end
+  end
+
+  context 'when a host which has no service exists' do
+    describe 'dangling_hosts' do
+      Host.create(hostname: 'test.example.com', ip_address: '192.168.0.1')
+
+      it 'returns the host' do
+        Host.dangling_hosts.should_not nil
+        Host.dangling_hosts.count == 1
+      end
+    end
+  end
+
+  context 'when a host which has a service exists' do
+    describe 'dangling_hosts' do
+      host = Host.create(hostname: 'test2.example.com', ip_address: '192.168.0.2')
+      HostService.create(host_id: host.id, service_id: 1)
+
+      it 'returns empty array' do
+        Host.dangling_hosts.count.should == 0
       end
     end
   end

@@ -10,4 +10,8 @@ class Host < ActiveRecord::Base
   def to_param
     hostname
   end
+
+  def self.dangling_hosts
+    find(:all, include: :host_services, conditions: { host_services: { service_id: nil } })
+  end
 end

@@ -1,4 +1,19 @@
 <%- model_class = Service.new.class -%>
+<%- unless @dangling_hosts.empty? %>
+<div class="page-header">
+  <h1><%=t '.dangling_hosts' %></h1>
+</div>
+<ul>
+  <%- @dangling_hosts.each do |host| %>
+    <li>
+      <%= host.hostname %> (<%= host.ip_address %>)
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          edit_host_path(host), :class => 'btn btn-mini' %>
+    </li>
+  <%- end %>
+</ul>
+<%- end %>
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>

@@ -18,7 +18,7 @@
         <li>
           <%= f.fields_for :host_services do |service| %>
             <%= service.select :service_id,
-                options_for_select(['unknown', nil], Service.all.map{|s| [s.name, s.id]}) %>
+                options_for_select(Service.all.map{|s| [s.name, s.id]}) %>
           <% end %>
         </li>
       </ul>
