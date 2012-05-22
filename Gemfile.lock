@@ -108,6 +108,8 @@ GEM
       slop (>= 2.4.4, < 3)
     pry-nav (0.2.1)
       pry (~> 0.9.9)
+    pry-rails (0.1.6)
+      pry
     pry-remote (0.1.4)
       pry (~> 0.9.9)
       slop (~> 2.1)
@@ -137,6 +139,9 @@ GEM
     rb-fsevent (0.9.1)
     rdoc (3.12)
       json (~> 1.4)
+    rrd-ffi (0.2.10)
+      activesupport
+      ffi
     rspec (2.10.0)
       rspec-core (~> 2.10.0)
       rspec-expectations (~> 2.10.0)
@@ -206,9 +211,11 @@ DEPENDENCIES
   jquery-rails
   pry
   pry-nav
+  pry-rails
   pry-remote
   rails (= 3.2.3)
   rb-fsevent
+  rrd-ffi
   rspec-rails
   ruby-debug19
   sass-rails

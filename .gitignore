@@ -16,3 +16,5 @@
 
 # Ignore gems installed with bundler
 /vendor/bundler/
+
+/sketch

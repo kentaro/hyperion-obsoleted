@@ -4,6 +4,8 @@ gem 'rails', '3.2.3'
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 
+gem 'rrd-ffi'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'guard-rspec'
@@ -11,6 +13,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
+  gem 'pry-rails'
 end
 
 group :test do
