@@ -21,8 +21,8 @@ class HostsController < ApplicationController
 
   def new
     @host = Host.new
-    @host.host_services.new
-    @host.host_roles.new
+    @host.host_services.build
+    @host.host_roles.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,6 +32,8 @@ class HostsController < ApplicationController
 
   def edit
     @host = Host.find_by_hostname(params[:id])
+    @host.host_services.build
+    @host.host_roles.build
   end
 
   def create

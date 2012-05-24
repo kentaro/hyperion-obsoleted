@@ -5,11 +5,11 @@ class Host < ActiveRecord::Base
 
   has_many :services, through: :host_services
   has_many :host_services, dependent: :destroy
-  accepts_nested_attributes_for :host_services, allow_destroy: true, reject_if: ->(attrs) { attrs[:service_id].blank? }
+  accepts_nested_attributes_for :host_services, allow_destroy: true, update_only: true, reject_if: ->(attrs) { attrs[:service_id].blank? }
 
   has_many :roles, through: :host_roles
   has_many :host_roles, dependent: :destroy
-  accepts_nested_attributes_for :host_roles, allow_destroy: true, reject_if: ->(attrs) { attrs[:role_id].blank? }
+  accepts_nested_attributes_for :host_roles, allow_destroy: true, update_only: true, reject_if: ->(attrs) { attrs[:role_id].blank? }
 
   class << self
     def dangling_hosts

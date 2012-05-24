@@ -14,27 +14,19 @@
   <div class="control-group">
     <%= f.label :services, :class => 'control-label' %>
     <div class="controls">
-      <ul id="services">
-        <li>
-          <%= f.fields_for :host_services do |service| %>
-            <%= service.select :service_id,
-                options_for_select(Service.all.map{|s| [s.name, s.id]}) %>
-          <% end %>
-        </li>
-      </ul>
+      <%= f.fields_for :host_services do |relation| %>
+        <%= relation.select :service_id,
+            options_for_select([['UNKNOWN', nil]] + Service.all.map{|s| [s.name, s.id]}, relation.object.service_id) %>
+      <% end %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :roles, :class => 'control-label' %>
     <div class="controls">
-      <ul id="roles">
-        <li>
-          <%= f.fields_for :host_roles do |role| %>
-            <%= role.select :role_id,
-                options_for_select(Role.all.map{|r| [r.name, r.id]}) %>
-          <% end %>
-        </li>
-      </ul>
+      <%= f.fields_for :host_roles do |relation| %>
+        <%= relation.select :role_id,
+            options_for_select([['UNKNOWN', nil]] + Role.all.map{|r| [r.name, r.id]}, relation.object.role_id) %>
+      <% end %>
     </div>
   </div>
   <div class="form-actions">
