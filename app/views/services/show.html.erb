@@ -28,16 +28,23 @@
 </div>
 
 <div class="page-header">
-  <h2><%=t '.hosts' %></h2>
+  <h2>
+    <%=t '.hosts' %>
+    <%= link_to t('.add', default: t("helpers.links.new")),
+        new_host_path,
+        class: 'btn' %>
+  </h2>
 </div>
 
 <div class="row">
   <% @service.hosts.each do |host| %>
     <div class="span5">
-      <ul>
-        <li><%= host.class.human_attribute_name(:hostname) %>: <%= host.hostname %></li>
-        <li><%= host.class.human_attribute_name(:ip_address) %>: <%= host.ip_address %></li>
-      </ul>
+      <dl class="dl-horizontal">
+        <dt><strong><%= host.class.human_attribute_name(:ip_address) %>:</strong></dt>
+        <dd><%= host.ip_address %></dd>
+        <dt><strong><%= host.class.human_attribute_name(:hostname) %>:</strong></dt>
+        <dd><%= host.hostname %></dd>
+      </dl>
       <div class="span5">
         <%= link_to t('.show', default: t("helpers.links.show")),
             host_path(host),
