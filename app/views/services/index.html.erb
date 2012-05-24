@@ -6,7 +6,7 @@
 <ul>
   <%- @dangling_hosts.each do |host| %>
     <li>
-      <%= host.hostname %> (<%= host.ip_address %>)
+      <%= host.hostname %><% if host.ip_address -%> (<%= host.ip_address %>)<% end -%>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
           edit_host_path(host), :class => 'btn btn-mini' %>
     </li>
