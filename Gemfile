@@ -9,11 +9,11 @@ gem 'rrd-ffi'
 group :development, :test do
   gem 'sqlite3'
   gem 'guard-rspec'
-  gem 'ruby-debug19'
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
   gem 'pry-rails'
+  gem 'tapp'
 end
 
 group :test do

@@ -21,3 +21,21 @@
               :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
               :class => 'btn btn-danger' %>
 </div>
+
+<div class="page-header">
+  <h2><%=t '.graphs' %></h2>
+</div>
+
+<div class="row">
+  <% @host.graphs.each do |graph| %>
+    <div class="span12">
+      <h3><%= graph.name %></h3>
+    </div>
+    <% graph.rrds.sort_by {|r| r.name }.each do |rrd| %>
+      <div class="span6">
+        <%= image_tag @host.graph_path_for(graph.name, rrd.name) %><br />
+        <%= rrd.name %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

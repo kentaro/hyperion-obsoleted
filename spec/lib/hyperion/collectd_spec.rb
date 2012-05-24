@@ -7,9 +7,11 @@ Hyperion::Collectd::COLLECTD_BASE_DIR = COLLECTD_BASE_DIR
 describe Hyperion::Collectd do
   describe 'initialize()' do
     context 'when correct base_dir passed' do
-      subject { Hyperion::Collectd.new COLLECTD_BASE_DIR }
+      let(:collectd) { Hyperion::Collectd.new COLLECTD_BASE_DIR }
 
-      it { should_not == nil }
+      subject { collectd }
+
+      it { should_not be_nil }
       its(:base_dir) { should == COLLECTD_BASE_DIR }
     end
 
@@ -30,17 +32,45 @@ describe Hyperion::Collectd do
     end
   end
 
-  describe 'hosts()' do
-    context 'when some hosts are under base_dir' do
-      before  { @hosts = Hyperion::Collectd.new.hosts }
-      subject { @hosts }
+  describe 'methods' do
+    let(:collectd) { Hyperion::Collectd.new COLLECTD_BASE_DIR }
 
-      it { should_not == nil }
-      its(:size) { should > 0 }
-      it 'holds instances of Hyperion::Collectd::Host' do
-        @hosts.each do |host|
-          host.should be_an_instance_of Hyperion::Collectd::Host
+    context 'when some hosts are under base_dir' do
+      describe 'hosts()' do
+        let(:hosts) { collectd.hosts }
+
+        subject { hosts }
+
+        it { should_not be_nil }
+        its(:size) { should > 0 }
+        it 'holds instances of Hyperion::Collectd::Host' do
+          hosts.each do |host|
+            host.should be_an_instance_of Hyperion::Collectd::Host
+          end
         end
+      end
+
+      describe 'plugins_for()' do
+        let(:plugins) { collectd.plugins_for('test.example.com') }
+
+        subject { plugins }
+
+        it { should_not be_nil }
+        its(:size) { should > 0 }
+        it 'holds instances of Hyperion::Collectd::Host' do
+          plugins.each do |host|
+            host.should be_an_instance_of Hyperion::Collectd::Plugin
+          end
+        end
+      end
+
+      describe 'rrd_for()' do
+        let(:rrd) { collectd.rrd_for('test.example.com', 'cpu', 'user') }
+
+        subject { rrd }
+
+        it { should_not be_nil }
+        it { should be_an_instance_of Hyperion::Collectd::RRD }
       end
     end
   end
@@ -79,18 +109,18 @@ describe Hyperion::Collectd do
   describe Hyperion::Collectd::Plugin do
     describe 'initialize()' do
       context 'when argument passed correctly' do
-        subject { Hyperion::Collectd::Plugin.new('test.example.com', 'cpu', COLLECTD_BASE_DIR + '/test.example.com/cpu') }
+        subject { Hyperion::Collectd::Plugin.new('test.example.com', 'cpu', COLLECTD_BASE_DIR + '/test.example.com/cpu-0') }
 
         its(:host) { should == 'test.example.com' }
         its(:name) { should == 'cpu' }
-        its(:path) { should == COLLECTD_BASE_DIR + '/test.example.com/cpu' }
+        its(:path) { should == COLLECTD_BASE_DIR + '/test.example.com/cpu-0' }
       end
     end
 
     describe 'rrds()' do
       context 'when some rrds are under base_dir' do
         before  {
-          @rrds = Hyperion::Collectd::Plugin.new('test.example.com', 'cpu', COLLECTD_BASE_DIR + '/test.example.com/cpu-1').rrds }
+          @rrds = Hyperion::Collectd::Plugin.new('test.example.com', 'cpu', COLLECTD_BASE_DIR + '/test.example.com/cpu-0').rrds }
         subject { @rrds }
 
         it { should_not == nil   }
@@ -107,11 +137,29 @@ describe Hyperion::Collectd do
   describe Hyperion::Collectd::RRD do
     describe 'initialize()' do
       context 'when argument passed correctly' do
-        subject { Hyperion::Collectd::RRD.new('cpu', 'user', COLLECTD_BASE_DIR + '/test.example.com/cpu/cpu-user.rrd') }
+        subject { Hyperion::Collectd::RRD.new('cpu', 'user', COLLECTD_BASE_DIR + '/test.example.com/cpu-0/cpu-user.rrd') }
 
         its(:plugin) { should == 'cpu' }
         its(:name)   { should == 'user' }
-        its(:path)   { should == COLLECTD_BASE_DIR + '/test.example.com/cpu/cpu-user.rrd' }
+        its(:path)   { should == COLLECTD_BASE_DIR + '/test.example.com/cpu-0/cpu-user.rrd' }
+      end
+    end
+
+    describe 'graph()' do
+      context 'when graph definition found' do
+        let(:rrd) { Hyperion::Collectd::RRD.new('cpu', 'user', COLLECTD_BASE_DIR + '/test.example.com/cpu-0/cpu-user.rrd') }
+
+        subject { rrd.graph }
+
+        it { should == "#{Hyperion::Collectd::GRAPH_BASE_DIR}/cpu-user.png" }
+      end
+
+      context 'when graph definition not found' do
+        let(:rrd) { Hyperion::Collectd::RRD.new('cpu', 'user', 'no-such-rrd') }
+
+        subject { rrd.graph }
+
+        it { should be_false }
       end
     end
   end
