@@ -29,12 +29,15 @@
 <div class="row">
   <% @host.graphs.each do |graph| %>
     <div class="span12">
-      <h3><%= graph.name %></h3>
+      <h3><%= graph.name %>
+        <% if graph.number %>
+          (<%= graph.ident %>)
+        <% end %>
+      </h3>
     </div>
-    <% graph.rrds.sort_by {|r| r.name }.each do |rrd| %>
+    <% graph.rrds.each do |rrd| %>
       <div class="span6">
-        <%= image_tag @host.graph_path_for(graph.name, rrd.name) %><br />
-        <%= rrd.name %>
+        <%= image_tag @host.graph_path_for(graph.ident, rrd.name) %><br />
       </div>
     <% end %>
   <% end %>
