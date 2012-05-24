@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
+gem 'jquery-rails'
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 
-gem 'configatron'
 gem 'rrd-ffi'
 
 group :development, :test do
@@ -26,8 +27,6 @@ group :test do
 end
 
 group :assets do
-  gem 'jquery-rails'
-  gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
