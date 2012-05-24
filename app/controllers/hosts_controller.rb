@@ -22,6 +22,7 @@ class HostsController < ApplicationController
   def new
     @host = Host.new
     @host.host_services.new
+    @host.host_roles.new
 
     respond_to do |format|
       format.html # new.html.erb

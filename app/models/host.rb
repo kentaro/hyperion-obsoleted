@@ -1,12 +1,15 @@
 require 'hyperion/collectd'
 
 class Host < ActiveRecord::Base
-  attr_accessible :hostname, :ip_address, :host_services_attributes
+  attr_accessible :hostname, :ip_address, :host_services_attributes, :host_roles_attributes
 
   has_many :services, through: :host_services
   has_many :host_services, dependent: :destroy
-
   accepts_nested_attributes_for :host_services, allow_destroy: true, reject_if: ->(attrs) { attrs[:service_id].blank? }
+
+  has_many :roles, through: :host_roles
+  has_many :host_roles, dependent: :destroy
+  accepts_nested_attributes_for :host_roles, allow_destroy: true, reject_if: ->(attrs) { attrs[:role_id].blank? }
 
   class << self
     def dangling_hosts

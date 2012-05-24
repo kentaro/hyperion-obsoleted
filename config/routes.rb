@@ -1,4 +1,6 @@
 Hyperion::Application.routes.draw do
+  resources :roles
+
   root :to => 'services#index'
 
   resources :services, constraints: { id: /[^\/]+/ }

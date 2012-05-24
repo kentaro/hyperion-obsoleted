@@ -24,7 +24,19 @@
       </ul>
     </div>
   </div>
-
+  <div class="control-group">
+    <%= f.label :roles, :class => 'control-label' %>
+    <div class="controls">
+      <ul id="roles">
+        <li>
+          <%= f.fields_for :host_roles do |role| %>
+            <%= role.select :role_id,
+                options_for_select(Role.all.map{|r| [r.name, r.id]}) %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

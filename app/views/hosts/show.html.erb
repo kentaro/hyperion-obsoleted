@@ -1,4 +1,9 @@
-<%- model_class = @host.class -%>
+<%-
+   model_class = @host.class
+   services    = @host.services
+   roles       = @host.roles
+-%>
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div>
@@ -10,6 +15,18 @@
       <dd><%= @host.ip_address %></dd>
       <dt><strong><%= model_class.human_attribute_name(:hostname) %>:</strong></dt>
       <dd><%= @host.hostname %></dd>
+      <% if services.size -%>
+        <dt><strong><%= model_class.human_attribute_name(:services) %>:</strong></dt>
+        <% services.each do |service| -%>
+          <dd><a href="<%= service_path(service) %>"><%= service.name %></a></dd>
+        <% end -%>
+      <% end -%>
+      <% if roles.size -%>
+        <dt><strong><%= model_class.human_attribute_name(:roles) %>:</strong></dt>
+        <% roles.each do |role| -%>
+          <dd><%= role.name %></dd>
+        <% end -%>
+      <% end -%>
     </dl>
   </div>
   <div class="span7">
@@ -34,8 +51,16 @@
 </div>
 
 <div class="row">
+  <div class="span12">
+    <ul>
+      <% @host.graphs.each do |graph| -%>
+        <li><a href="#<%= graph.ident %>"><%= graph.name %><% if graph.number %>[<%= graph.number %>]<% end %></a></li>
+      <% end -%>
+    </ul>
+  </div>
+
   <% @host.graphs.each do |graph| %>
-    <div class="span12">
+    <div id="<%= graph.ident %>" class="span12">
       <div class="page-header">
       <h3><%= graph.name %><% if graph.number %>[<%= graph.number %>]<% end %> metrics <small>(<%= graph.rrds.size %>)</small></h3>
       </div>

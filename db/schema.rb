@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516222358) do
+ActiveRecord::Schema.define(:version => 20120524110703) do
+
+  create_table "host_roles", :force => true do |t|
+    t.integer  "host_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "host_roles", ["host_id"], :name => "index_host_roles_on_host_id"
+  add_index "host_roles", ["role_id", "host_id"], :name => "index_host_roles_on_role_id_and_host_id", :unique => true
+  add_index "host_roles", ["role_id"], :name => "index_host_roles_on_role_id"
 
   create_table "host_services", :force => true do |t|
     t.integer  "host_id"
@@ -33,6 +44,13 @@ ActiveRecord::Schema.define(:version => 20120516222358) do
 
   add_index "hosts", ["hostname"], :name => "index_hosts_on_hostname", :unique => true
   add_index "hosts", ["ip_address"], :name => "index_hosts_on_ip_address", :unique => true
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "services", :force => true do |t|
     t.string   "name"
