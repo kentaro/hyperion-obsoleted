@@ -2,8 +2,8 @@ require 'rrd'
 
 module Hyperion
   class Collectd
-    COLLECTD_BASE_DIR = '/var/lib/collectd/rrd'
-    GRAPH_BASE_DIR    = '/tmp'
+    COLLECTD_BASE_DIR = configatron.collectd_base_dir
+    GRAPH_BASE_DIR    = configatron.collectd_graph_base_dir
 
     attr_accessor :base_dir
 
