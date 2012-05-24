@@ -3,12 +3,19 @@
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:ip_address) %>:</strong></dt>
-  <dd><%= @host.ip_address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:hostname) %>:</strong></dt>
-  <dd><%= @host.hostname %></dd>
-</dl>
+<div class="row">
+  <div class="span5">
+    <dl class="dl-horizontal">
+      <dt><strong><%= model_class.human_attribute_name(:ip_address) %>:</strong></dt>
+      <dd><%= @host.ip_address %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:hostname) %>:</strong></dt>
+      <dd><%= @host.hostname %></dd>
+    </dl>
+  </div>
+  <div class="span7">
+    <%= image_tag @host.graph_path_for('load', 'load') %>
+  </div>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

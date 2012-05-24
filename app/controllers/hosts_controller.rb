@@ -1,3 +1,5 @@
+require 'hyperion/collectd'
+
 class HostsController < ApplicationController
   def index
     @hosts = Host.all
@@ -67,5 +69,12 @@ class HostsController < ApplicationController
       format.html { redirect_to hosts_url }
       format.json { head :no_content }
     end
+  end
+
+  def graph
+    @host = Host.find_by_hostname(params[:id])
+
+    rrd = Hyperion::Collectd.new.rrd_for @host.hostname, params[:plugin], params[:type]
+    send_file rrd.graph, type: 'image/png', disposition: 'inline'
   end
 end

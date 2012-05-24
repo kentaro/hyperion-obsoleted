@@ -28,6 +28,6 @@ class Host < ActiveRecord::Base
   end
 
   def graph_path_for (plugin, type, options = {})
-    "/graph/#{hostname}/#{plugin}/#{type}"
+    "/hosts/#{hostname}/graph?plugin=#{plugin}&type=#{type}"
   end
 end

@@ -1,14 +1,10 @@
 Hyperion::Application.routes.draw do
   root :to => 'services#index'
 
-  resources :hosts,    constraints: { id: /[^\s]+/ }
-  resources :services, constraints: { id: /[^\s]+/ }
-
-  match '/graph/:hostname/:plugin/:type' => 'graph#show',
-  via: [:get],
-  constraints: {
-    hostname: /[^\s]+/,
-    plugin:   /[^\s]+/,
-    type:     /[^\s]+/
-  }
+  resources :services, constraints: { id: /[^\/]+/ }
+  resources :hosts,    constraints: { id: /[^\/]+/ } do
+    member do
+      get 'graph'
+    end
+  end
 end
