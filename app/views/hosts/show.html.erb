@@ -36,11 +36,9 @@
 <div class="row">
   <% @host.graphs.each do |graph| %>
     <div class="span12">
-      <h3><%= graph.name %>
-        <% if graph.number %>
-          (<%= graph.ident %>)
-        <% end %>
-      </h3>
+      <div class="page-header">
+      <h3><%= graph.name %><% if graph.number %>[<%= graph.number %>]<% end %> metrics <small>(<%= graph.rrds.size %>)</small></h3>
+      </div>
     </div>
     <% graph.rrds.each do |rrd| %>
       <div class="span6">
