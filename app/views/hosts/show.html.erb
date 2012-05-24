@@ -53,13 +53,13 @@
 <div class="row">
   <div class="span12">
     <ul>
-      <% @host.graphs.each do |graph| -%>
+      <% @host.graphs && @host.graphs.each do |graph| -%>
         <li><a href="#<%= graph.ident %>"><%= graph.name %><% if graph.number %>[<%= graph.number %>]<% end %></a></li>
       <% end -%>
     </ul>
   </div>
 
-  <% @host.graphs.each do |graph| %>
+  <% @host.graphs && @host.graphs.each do |graph| %>
     <div id="<%= graph.ident %>" class="span12">
       <div class="page-header">
       <h3><%= graph.name %><% if graph.number %>[<%= graph.number %>]<% end %> metrics <small>(<%= graph.rrds.size %>)</small></h3>

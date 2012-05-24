@@ -126,8 +126,10 @@ module Hyperion
           if (::RRD::Wrapper.graph(graph, '-t', title, *spec))
             graph
           else
-            raise ::RRD.error
+            raise RRD::Error.new(::RRD.error)
           end
+        else
+          raise ArgumentError.new('no such graph')
         end
       end
     end

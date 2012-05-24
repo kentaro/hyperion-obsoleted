@@ -7,35 +7,35 @@ describe "Services" do
     describe "GET /" do
       it "works!" do
         get services_path
-        response.status.should be(200)
+        response.should be_success
       end
     end
 
     describe "GET /services" do
       it "works!" do
         get services_path
-        response.status.should be(200)
+        response.should be_success
       end
     end
 
     describe "GET /services/:name" do
       it "works!" do
         get service_path(@service)
-        response.status.should be(200)
+        response.should be_success
       end
     end
 
     describe "GET /services/new" do
       it "works!" do
         get new_service_path
-        response.status.should be(200)
+        response.should be_success
       end
     end
 
     describe "GET /services/:name/edit" do
       it "works!" do
         get edit_service_path(@service)
-        response.status.should be(200)
+        response.should be_success
       end
     end
 

@@ -65,7 +65,7 @@ describe Hyperion::Collectd do
       end
 
       describe 'rrd_for()' do
-        let(:rrd) { collectd.rrd_for('test.example.com', 'cpu', 'user') }
+        let(:rrd) { collectd.rrd_for('test.example.com', 'cpu-0', 'user') }
 
         subject { rrd }
 
@@ -109,7 +109,7 @@ describe Hyperion::Collectd do
   describe Hyperion::Collectd::Plugin do
     describe 'initialize()' do
       context 'when argument passed correctly' do
-        subject { Hyperion::Collectd::Plugin.new('test.example.com', 'cpu', COLLECTD_BASE_DIR + '/test.example.com/cpu-0') }
+        subject { Hyperion::Collectd::Plugin.new('test.example.com', 'cpu-0', COLLECTD_BASE_DIR + '/test.example.com/cpu-0') }
 
         its(:host) { should == 'test.example.com' }
         its(:name) { should == 'cpu' }
@@ -157,9 +157,9 @@ describe Hyperion::Collectd do
       context 'when graph definition not found' do
         let(:rrd) { Hyperion::Collectd::RRD.new('cpu', 'user', 'no-such-rrd') }
 
-        subject { rrd.graph }
-
-        it { should be_false }
+        it 'should raise exception' do
+          lambda { rrd.graph }.should raise_exception
+        end
       end
     end
   end
