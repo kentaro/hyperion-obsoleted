@@ -31,3 +31,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
 end
+
+group :production do
+  gem 'unicorn'
+end
