@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Hosts" do
   context "When users" do
-    let(:host) { Host.create(hostname: 'test.example.com', ip_address: '192.168.0.1') }
+    let(:host) { create(:host) }
     before { }
 
     describe "GET /hosts" do

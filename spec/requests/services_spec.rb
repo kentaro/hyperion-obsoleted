@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe "Services" do
   context "When users" do
-    before { @service = Service.create(name: 'test', description: 'test') }
+    let(:service) { create(:service) }
+    before {}
 
     describe "GET /" do
       it "works!" do
@@ -20,7 +21,7 @@ describe "Services" do
 
     describe "GET /services/:name" do
       it "works!" do
-        get service_path(@service)
+        get service_path(service)
         response.should be_success
       end
     end
@@ -34,7 +35,7 @@ describe "Services" do
 
     describe "GET /services/:name/edit" do
       it "works!" do
-        get edit_service_path(@service)
+        get edit_service_path(service)
         response.should be_success
       end
     end
@@ -48,14 +49,14 @@ describe "Services" do
 
     describe "PUT /services/:name" do
       it "works!" do
-        put service_path(@service), 'service[name]' => 'updated', 'service[description]' => 'test'
+        put service_path(service), 'service[name]' => 'updated', 'service[description]' => 'test'
         response.status.should be(302)
       end
     end
 
     describe "DELETE /services/:name" do
       it "works!" do
-        delete service_path(@service)
+        delete service_path(service)
         response.status.should be(302)
       end
     end

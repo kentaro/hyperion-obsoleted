@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'spork'
+require 'factory_girl'
+require 'database_cleaner'
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
@@ -15,7 +17,10 @@ Spork.prefork do
     config.use_transactional_fixtures = true
     config.infer_base_class_for_anonymous_controllers = false
 
-    require 'database_cleaner'
+    # factory girl
+    config.include FactoryGirl::Syntax::Methods
+
+    # database cleaner
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.clean_with(:truncation)
