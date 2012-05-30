@@ -8,6 +8,7 @@ gem 'sqlite3'
 gem 'rrd-ffi'
 
 group :development do
+  gem 'guard-bundler'
   gem 'guard-livereload'
   gem 'rack-livereload'
 
