@@ -34,4 +34,15 @@ Hyperion::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # rack-livereload
+  config.middleware.insert_before(
+    Rack::Lock,
+    Rack::LiveReload,
+    min_delay: 500,
+    max_delay: 10000,
+    port:      35729,
+    host:      'localhost',
+    ignore:    []
+  )
 end

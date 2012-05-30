@@ -7,16 +7,20 @@ gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 gem 'sqlite3'
 gem 'rrd-ffi'
 
-group :development, :test do
-  gem 'guard-rspec'
+group :development do
+  gem 'guard-livereload'
+  gem 'rack-livereload'
+
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
   gem 'pry-rails'
+
   gem 'tapp'
 end
 
 group :test do
+  gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'rb-fsevent'
