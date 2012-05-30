@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe HostService do
-  before { @relation = HostService.create(host_id: rand, service_id: rand) }
+  let(:relation) { create(:host_service) }
+  before {}
 
   describe "attrs" do
-    subject { @relation }
+    subject { relation }
 
     [:host_id, :service_id].each do |attr|
       it { should respond_to attr }
@@ -12,7 +13,7 @@ describe HostService do
   end
 
   describe "relation" do
-    subject { @relation }
+    subject { relation }
 
     [:host, :service].each do |relation|
       it { should respond_to relation }

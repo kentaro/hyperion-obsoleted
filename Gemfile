@@ -21,13 +21,15 @@ group :development do
 end
 
 group :test do
-  gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'rb-fsevent'
-  gem 'growl'
-  gem 'guard-spork'
+
   gem 'spork'
+  gem 'rb-fsevent'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
 
