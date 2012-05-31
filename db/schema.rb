@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120524110703) do
+ActiveRecord::Schema.define(:version => 20120531053329) do
 
   create_table "host_roles", :force => true do |t|
     t.integer  "host_id"
@@ -60,5 +60,19 @@ ActiveRecord::Schema.define(:version => 20120524110703) do
   end
 
   add_index "services", ["name"], :name => "index_services_on_name", :unique => true
+
+  create_table "users", :force => true do |t|
+    t.string   "provider"
+    t.integer  "uid"
+    t.string   "name"
+    t.string   "image"
+    t.string   "token"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+  add_index "users", ["provider", "uid"], :name => "index_users_on_provider_and_uid", :unique => true
+  add_index "users", ["token"], :name => "index_users_on_token", :unique => true
 
 end
