@@ -30,8 +30,8 @@ describe Service do
       it 'should have a host' do
         subject { service }
 
-        (0..1).each do |i|
-          host = create(:host, hostname: "test #{i}", ip_address: "192.168.0.#{i}")
+        2.times do |i|
+          host = create(:host)
           create(:host_service, host_id: host.id, service_id: service.id)
         end
 

@@ -30,7 +30,7 @@ describe Host do
       it 'should have services' do
         subject { host }
 
-        (0..1).each do |i|
+        2.times do |i|
           service = create(:service, name: "test #{i}", description: 'test')
           create(:host_service, host_id: host.id, service_id: service.id)
         end
