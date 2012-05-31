@@ -7,6 +7,9 @@ gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 gem 'sqlite3'
 gem 'rrd-ffi'
 
+gem 'omniauth'
+gem 'omniauth-github'
+
 group :development do
   gem 'guard-bundler'
   gem 'guard-livereload'
@@ -29,6 +32,7 @@ group :test do
   gem 'guard-rspec'
   gem 'guard-spork'
 
+  gem 'forgery'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end

@@ -1,6 +1,4 @@
 Hyperion::Application.routes.draw do
-  resources :roles
-
   root :to => 'services#index'
 
   resources :services, constraints: { id: /[^\/]+/ }
@@ -9,4 +7,9 @@ Hyperion::Application.routes.draw do
       get 'graph'
     end
   end
+  resources :roles
+
+  match '/signin' => redirect('/auth/github')
+  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/auth/:provider/callback', to: 'sessions#create'
 end
