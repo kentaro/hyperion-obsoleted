@@ -1,4 +1,4 @@
-if (ENV[RAILS_ENV] == 'development')
+if (ENV['RAILS_ENV'] == 'development')
   require 'rack-livereload'
   use Rack::LiveReload
 end
