@@ -250,6 +250,7 @@ DEPENDENCIES
   pry-remote
   rack-livereload
   rails (= 3.2.3)
+  rake
   rb-fsevent
   rrd-ffi
   rspec-rails
