@@ -52,4 +52,26 @@ describe Service do
       end
     end
   end
+
+  describe '#hosts_grouped_by_role' do
+    context 'when it has not hosts' do
+      let(:service) { create(:service) }
+      let(:grouped) { service.hosts_grouped_by_role }
+      subject { grouped }
+
+      it { should_not be_nil }
+      it { should be_an_instance_of Hash }
+      specify { subject.keys.size == 0 }
+    end
+
+    context 'when it has hosts' do
+      let(:service) { create(:service, :with_hosts) }
+      let(:grouped) { service.hosts_grouped_by_role }
+      subject { grouped }
+
+      it { should_not be_nil }
+      it { should be_an_instance_of Hash }
+      specify { subject.keys.size == 1 }
+    end
+  end
 end

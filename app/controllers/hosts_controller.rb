@@ -32,8 +32,8 @@ class HostsController < ApplicationController
 
   def edit
     @host = Host.find_by_hostname(params[:id])
-    @host.host_services.build
-    @host.host_roles.build
+    @host.host_services.empty? && @host.host_services.build
+    @host.host_roles.empty?    && @host.host_roles.build
   end
 
   def create

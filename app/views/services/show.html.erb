@@ -36,26 +36,30 @@
   </h2>
 </div>
 
-<div class="row">
-  <% @service.hosts.each do |host| %>
-    <div class="span5">
-      <dl class="dl-horizontal">
-        <dt><strong><%= host.class.human_attribute_name(:ip_address) %>:</strong></dt>
-        <dd><%= host.ip_address %></dd>
-        <dt><strong><%= host.class.human_attribute_name(:hostname) %>:</strong></dt>
-        <dd><%= host.hostname %></dd>
-      </dl>
+<% grouped_hosts = @service.hosts_grouped_by_role %>
+<% grouped_hosts.keys.each do |role| %>
+  <h3><%= role %></h3>
+  <% grouped_hosts[role].each do |host| %>
+  <div class="row">
       <div class="span5">
-        <%= link_to t('.show', default: t("helpers.links.show")),
-            host_path(host),
-            class: 'btn' %>
-        <%= link_to t('.edit', default: t("helpers.links.edit")),
-            edit_host_path(host),
-            class: 'btn' %>
+        <dl class="dl-horizontal">
+          <dt><strong><%= host.class.human_attribute_name(:ip_address) %>:</strong></dt>
+          <dd><%= host.ip_address %></dd>
+          <dt><strong><%= host.class.human_attribute_name(:hostname) %>:</strong></dt>
+          <dd><%= host.hostname %></dd>
+        </dl>
+        <div class="span5">
+          <%= link_to t('.show', default: t("helpers.links.show")),
+              host_path(host),
+              class: 'btn' %>
+          <%= link_to t('.edit', default: t("helpers.links.edit")),
+              edit_host_path(host),
+              class: 'btn' %>
+        </div>
       </div>
-    </div>
-    <div class="span7">
-      <%= image_tag host.graph_path_for('load', 'load') %>
-    </div>
+      <div class="span7">
+        <%= image_tag host.graph_path_for('load', 'load') %>
+      </div>
+  </div>
   <% end %>
-</div>
+<% end %>

@@ -16,7 +16,7 @@
     <div class="controls">
       <%= f.fields_for :host_services do |relation| %>
         <%= relation.select :service_id,
-            options_for_select([['UNKNOWN', nil]] + Service.all.map{|s| [s.name, s.id]}, relation.object.service_id) %>
+            options_for_select([['UNDEFINED', nil]] + Service.all.map{|s| [s.name, s.id]}, relation.object.service_id) %>
       <% end %>
     </div>
   </div>
@@ -25,7 +25,7 @@
     <div class="controls">
       <%= f.fields_for :host_roles do |relation| %>
         <%= relation.select :role_id,
-            options_for_select([['UNKNOWN', nil]] + Role.all.map{|r| [r.name, r.id]}, relation.object.role_id) %>
+            options_for_select([['UNDEFINED', nil]] + Role.all.map{|r| [r.name, r.id]}, relation.object.role_id) %>
       <% end %>
     </div>
   </div>
