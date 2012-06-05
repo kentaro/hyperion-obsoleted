@@ -23,4 +23,16 @@ module SessionsHelper
   def current_user=(user)
     @_current_user = user
   end
+
+  def return_to
+    session[:return_to]
+  end
+
+  def set_return_to
+    session[:return_to] = params[:return_to]
+  end
+
+  def return_to_or(target, *args)
+    redirect_to(return_to || target, *args)
+  end
 end

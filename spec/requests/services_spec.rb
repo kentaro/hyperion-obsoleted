@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Services" do
   context "When users" do
     let(:service) { create(:service) }
-    before {}
+    subject { page }
 
     describe "GET /" do
       it "works!" do
@@ -40,10 +40,31 @@ describe "Services" do
       end
     end
 
-    describe "POST /services" do
-      it "works!" do
-        post services_path, 'service[name]' => 'test2', 'service[description]' => 'test'
-        response.status.should be(302)
+    describe "new_service_page" do
+      context "when `return_to' query not exists" do
+        let(:service_name) { "Test Service #{rand(2**32)}" }
+
+        before {
+          visit new_service_path
+          fill_in 'Name',        with: service_name
+          fill_in 'Description', with: 'desc for service'
+          click_button 'Create Service'
+        }
+
+        it { should have_selector('h1', text: 'Service') }
+      end
+
+      context "when `return_to' query exists" do
+        let(:service_name) { "Test Service #{rand(2**32)}" }
+
+        before {
+          visit new_service_path(return_to: '/')
+          fill_in 'Name',        with: service_name
+          fill_in 'Description', with: 'desc for service'
+          click_button 'Create Service'
+        }
+
+        it { should have_selector('h1', text: 'Services') }
       end
     end
 
