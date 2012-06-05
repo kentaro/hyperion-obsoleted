@@ -1,0 +1,10 @@
+<script type="text/javascript">
+  $().toastmessage('showToast', {
+    text             : '<%= args[:message] %>',
+    sticky           : <%=  args[:sticky]   || 'false' %>,
+    position         : '<%= args[:position] || 'top-right' %>',
+    type             : '<%= args[:type]     || 'notice' %>',
+    inEffectDuration : <%=  args[:duration] || 600 %>,
+    stayTime         : <%=  args[:stayTime] || 3000 %>
+});
+</script>
