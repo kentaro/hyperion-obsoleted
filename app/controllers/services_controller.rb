@@ -20,6 +20,7 @@ class ServicesController < ApplicationController
 
   def new
     @service = Service.new
+    set_return_to
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +37,7 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save
-        format.html { redirect_to @service, notice: 'Service was successfully created.' }
+        format.html { return_to_or @service, notice: 'Service was successfully created.' }
         format.json { render json: @service, status: :created, location: @service }
       else
         format.html { render action: "new" }

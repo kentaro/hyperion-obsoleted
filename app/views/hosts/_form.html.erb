@@ -18,6 +18,7 @@
         <%= relation.select :service_id,
             options_for_select([['UNDEFINED', nil]] + Service.all.map{|s| [s.name, s.id]}, relation.object.service_id) %>
       <% end %>
+      <p><%= link_to 'Add new service', new_service_path(return_to: request.original_url) %></p>
     </div>
   </div>
   <div class="control-group">
@@ -27,6 +28,7 @@
         <%= relation.select :role_id,
             options_for_select([['UNDEFINED', nil]] + Role.all.map{|r| [r.name, r.id]}, relation.object.role_id) %>
       <% end %>
+      <p><%= link_to 'Add new role', new_role_path(return_to: request.original_url) %></p>
     </div>
   </div>
   <div class="form-actions">

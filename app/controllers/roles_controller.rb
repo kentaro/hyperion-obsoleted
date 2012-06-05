@@ -25,6 +25,7 @@ class RolesController < ApplicationController
   # GET /roles/new.json
   def new
     @role = Role.new
+    set_return_to
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
+        format.html { return_to_or @role, notice: 'Role was successfully created.' }
         format.json { render json: @role, status: :created, location: @role }
       else
         format.html { render action: "new" }
