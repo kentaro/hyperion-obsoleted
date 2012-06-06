@@ -45,7 +45,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        set_toast 'Role was successfully created.'
+        set_toast message: 'Role was successfully created.'
 
         format.html { return_to_or @role }
         format.json { render json: @role, status: :created, location: @role }
@@ -63,7 +63,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.update_attributes(params[:role])
-        set_toast 'Role was successfully updated.'
+        set_toast message: 'Role was successfully updated.'
 
         format.html { redirect_to }
         format.json { head :no_content }

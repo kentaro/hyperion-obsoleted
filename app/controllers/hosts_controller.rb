@@ -41,7 +41,7 @@ class HostsController < ApplicationController
 
     respond_to do |format|
       if @host.save
-        set_toast 'Host was successfully created.'
+        set_toast message: 'Host was successfully created.'
 
         format.html { redirect_to @host }
         format.json { render json: @host, status: :created, location: @host }
@@ -57,7 +57,7 @@ class HostsController < ApplicationController
 
     respond_to do |format|
       if @host.update_attributes(params[:host])
-        set_toast 'Host was successfully updated.'
+        set_toast message: 'Host was successfully updated.'
 
         format.html { redirect_to @host }
         format.json { head :no_content }

@@ -37,7 +37,7 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save
-        set_toast 'Service was successfully created.'
+        set_toast message: 'Service was successfully created.'
 
         format.html { return_to_or @service }
         format.json { render json: @service, status: :created, location: @service }
@@ -53,7 +53,7 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.update_attributes(params[:service])
-        set_toast 'Service was successfully updated.'
+        set_toast message: 'Service was successfully updated.'
 
         format.html { redirect_to @service }
         format.json { head :no_content }

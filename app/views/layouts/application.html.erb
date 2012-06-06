@@ -71,7 +71,7 @@
     <%= javascript_include_tag "application" %>
 
     <% if toast -%>
-      <%= render 'shared/toast', args: { message: toast, type: 'success' } %>
+      <%= render 'shared/toast', toast: toast %>
     <% end -%>
   </body>
 </html>
