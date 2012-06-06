@@ -11,6 +11,9 @@ class Host < ActiveRecord::Base
   has_many :host_roles, dependent: :destroy
   accepts_nested_attributes_for :host_roles, allow_destroy: true, update_only: true, reject_if: ->(attrs) { attrs[:role_id].blank? }
 
+  validates :hostname, presence: true, uniqueness: true
+  validates :ip_address, uniqueness: true, format: { with: %r/\A\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\Z/ }
+
   class << self
     def dangling_hosts
       find(:all, include: :host_services, conditions: { host_services: { service_id: nil } })

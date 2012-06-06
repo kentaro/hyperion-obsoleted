@@ -4,12 +4,11 @@ group :specs do
   end
 
   guard 'rspec', :version => 2, :cli => '--format d --color --drb', :all_on_start => false, :all_after_pass => false do
-    watch(%r{^spec/.+_spec\.rb$})
     watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
     watch('spec/spec_helper.rb')  { "spec" }
 
     # for factory_girl
-    watch(%r{^spec/factories/(.+)\.rb$}) { |m| "spec/factories/#{m[1]}.rb" }
+    watch(%r{^spec/factories/(.+)\.rb$})
 
     # Rails example
     watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
